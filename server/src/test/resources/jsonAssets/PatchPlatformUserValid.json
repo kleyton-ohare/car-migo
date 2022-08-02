@@ -3,10 +3,5 @@
     "op": "replace",
     "path": "/phoneNumber",
     "value": "02834210920"
-  },
-  {
-    "op": "replace",
-    "path": "/userAccessStatus/id",
-    "value": "2"
   }
 ]

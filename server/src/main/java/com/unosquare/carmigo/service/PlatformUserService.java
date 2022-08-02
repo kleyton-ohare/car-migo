@@ -5,25 +5,18 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
-import com.unosquare.carmigo.dto.CreateAuthenticationDTO;
 import com.unosquare.carmigo.dto.CreatePlatformUserDTO;
-import com.unosquare.carmigo.dto.GrabAuthenticationDTO;
 import com.unosquare.carmigo.dto.GrabPlatformUserDTO;
 import com.unosquare.carmigo.entity.PlatformUser;
 import com.unosquare.carmigo.entity.UserAccessStatus;
 import com.unosquare.carmigo.exception.ResourceNotFoundException;
 import com.unosquare.carmigo.repository.PlatformUserRepository;
 import com.unosquare.carmigo.security.Authorization;
-import com.unosquare.carmigo.security.UserSecurityService;
-import com.unosquare.carmigo.util.JwtTokenUtils;
 import java.time.Instant;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,24 +27,11 @@ public class PlatformUserService {
   private static final int INITIAL_USER_STATUS = 1;
 
   private final PlatformUserRepository platformUserRepository;
-  private final UserSecurityService userSecurityService;
   private final ModelMapper modelMapper;
   private final ObjectMapper objectMapper;
   private final EntityManager entityManager;
-  private final AuthenticationManager authenticationManager;
   private final BCryptPasswordEncoder bCryptPasswordEncoder;
-  private final JwtTokenUtils jwtTokenUtils;
   private final Authorization authorization;
-
-  public GrabAuthenticationDTO createAuthenticationToken(final CreateAuthenticationDTO createAuthenticationDTO) {
-    authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-        createAuthenticationDTO.getEmail(), createAuthenticationDTO.getPassword()));
-    final UserDetails userDetails = userSecurityService.loadUserByUsername(createAuthenticationDTO.getEmail());
-    final String jwt = jwtTokenUtils.generateToken(userDetails);
-    final GrabAuthenticationDTO grabAuthenticationDTO = new GrabAuthenticationDTO();
-    grabAuthenticationDTO.setJwt(jwt);
-    return grabAuthenticationDTO;
-  }
 
   public GrabPlatformUserDTO getPlatformUserById(final int id) {
     return modelMapper.map(findPlatformUserById(id), GrabPlatformUserDTO.class);

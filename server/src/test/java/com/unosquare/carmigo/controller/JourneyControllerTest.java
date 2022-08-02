@@ -37,13 +37,13 @@ public class JourneyControllerTest {
 
   private static final String API_LEADING = "/v1/journeys/";
   private static final String POST_JOURNEY_VALID_JSON =
-      ResourceUtility.generateStringFromResource("requestJson/PostJourneyValid.json");
+      ResourceUtility.generateStringFromResource("jsonAssets/PostJourneyValid.json");
   private static final String POST_JOURNEY_INVALID_JSON =
-      ResourceUtility.generateStringFromResource("requestJson/PostJourneyInvalid.json");
+      ResourceUtility.generateStringFromResource("jsonAssets/PostJourneyInvalid.json");
   private static final String PATCH_JOURNEY_VALID_JSON =
-      ResourceUtility.generateStringFromResource("requestJson/PatchJourneyValid.json");
+      ResourceUtility.generateStringFromResource("jsonAssets/PatchJourneyValid.json");
   private static final String PATCH_JOURNEY_INVALID_JSON =
-      ResourceUtility.generateStringFromResource("requestJson/PatchJourneyInvalid.json");
+      ResourceUtility.generateStringFromResource("jsonAssets/PatchJourneyInvalid.json");
 
   private MockMvc mockMvc;
 

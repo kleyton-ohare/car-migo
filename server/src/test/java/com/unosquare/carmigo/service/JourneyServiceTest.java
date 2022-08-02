@@ -47,7 +47,7 @@ import org.modelmapper.ModelMapper;
 public class JourneyServiceTest {
 
   private static final String PATCH_JOURNEY_VALID_JSON =
-      ResourceUtility.generateStringFromResource("requestJson/PatchJourneyValid.json");
+      ResourceUtility.generateStringFromResource("jsonAssets/PatchJourneyValid.json");
 
   @Mock private JourneyRepository journeyRepositoryMock;
   @Mock private PassengerJourneyRepository passengerJourneyRepositoryMock;
